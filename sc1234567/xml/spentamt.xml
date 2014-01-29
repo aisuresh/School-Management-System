@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<spentamt>
+  <Amount>
+    <spentfor>rwrawrfwer</spentfor>
+    <bill>122</bill>
+    <amt>3333</amt>
+    <spentby>wrfwarfwa</spentby>
+  </Amount>
+  <Amount>
+    <spentfor>wrw3rwrr</spentfor>
+    <bill>1222</bill>
+    <amt>3344</amt>
+    <spentby>tgsdg</spentby>
+  </Amount>
+</spentamt>

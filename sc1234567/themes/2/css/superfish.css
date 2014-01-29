@@ -1,0 +1,176 @@
+
+/*** ESSENTIAL STYLES ***/
+.sf-menu, .sf-menu * {
+	margin:			0;
+	padding:		0;
+	list-style:		none;
+}
+.sf-menu {
+	line-height:	0.8;
+}
+.sf-menu ul {
+	position:		absolute;
+	top:			-999em;
+	width:			10em; /* left offset of submenus need to match (see below) */
+}
+
+#current{background:url('../images/menubtn_bgovr.gif') repeat-x;}
+.sf-menu li:hover {
+	visibility:		inherit; /* fixes IE7 'sticky bug' */
+}
+.sf-menu li {
+	float:			left;
+	position:		relative;
+	
+}
+.sf-menu a {
+	display:		block;
+	position:		relative;
+}
+.sf-menu li:hover ul,
+.sf-menu li.sfHover ul {
+	left:			0px; /* sub lever one position 'x'*/
+	top:			2.1em; /* match top ul list item height */
+	z-index:		99;
+}
+ul.sf-menu li:hover li ul,
+ul.sf-menu li.sfHover li ul {
+	font-family    :Verdana, Arial, Helvetica, sans-serif;
+	font-size      :11px;
+	top            :-999em;
+
+}
+ul.sf-menu li li:hover ul,
+ul.sf-menu li li.sfHover ul {
+	left:			13.8em; /* match ul //width third sub level left position*/
+	top:			0;
+}
+ul.sf-menu li li:hover li ul,
+ul.sf-menu li li.sfHover li ul {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	top:			-999em;
+}
+ul.sf-menu li li li:hover ul,
+ul.sf-menu li li li.sfHover ul {
+	left:			10em; /* match ul width */
+	top:			0;
+}
+
+/*** DEMO SKIN ***/
+.sf-menu {
+	float:			left;
+	margin-bottom:	1em;
+}
+.sf-menu a {
+	padding: 		0.5em 2.16em 0.5em 2.15em;
+	text-decoration:none;
+}
+/*.sf-menu ul .item193, .sf-menu ul .item194, .sf-menu ul .item195, .sf-menu ul .item196 { left:-20px; }*/
+
+.sf-menu a, .sf-menu a:visited  { /* visited pseudo selector so IE6 applies text colour*/
+}
+.sf-menu  li a {	
+	font-size:13px;  
+	color:#0a66c4;
+	font-weight:bold;
+	border-right:1px dotted #54c0f0;
+}
+.sf-menu  li a:hover {	
+	color:#1682f2;
+	font-weight:bold;
+	font-size:13px;
+}
+
+.sf-menu li li a{
+	background-color:	 #e1f4fc;
+	width:160px;
+	padding:10px 0px 10px 0px;
+	color:#1682f2;
+	font-family:   Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	border-left:0;
+	font-weight:normal;
+	text-indent:10px;
+	border-right:0;
+	z-index:9;
+}
+.sf-menu li li a:hover{
+	background-color:	   #f2fafd;
+	width:160px;
+	padding:10px 0px 10px 0px;
+	color:#f97600;
+	font-weight:normal;
+	font-size:11px;
+}
+.sf-menu  li li {	
+	background-color:	   #cae9f7;
+	font-family:   Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#004f69;
+}
+
+.sf-menu li li li {
+	background   :#f4f8fb;
+	width:          160px;
+	height:          10px;
+/*	padding-bottom:  15px;*/
+	font-family:     Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#638834;
+	z-index:99999999999;
+	top:-20px;
+	margin-top:20px;
+}
+.sf-menu li li li a{z-index:9999999;}
+.sf-menu li:hover, .sf-menu li.sfHover,
+.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
+	outline:		0;
+}
+
+.sf-shadow ul {
+	background:	url('../images/shadow.png') bottom right repeat-x ;
+	padding: 0 58px 8px 0;
+	-moz-border-radius-bottomleft: 17px;
+	-moz-border-radius-topright: 17px;
+	-webkit-border-top-right-radius: 17px;
+	-webkit-border-bottom-left-radius: 17px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+/*	border:1px solid #CC0000;*/
+}
+.sf-sub-indicator {
+	position:		absolute;
+	display:		block;
+	right:			.75em;
+	top:			0.80em; /* IE6 only */
+	width:			10px;
+	height:			10px;
+	text-indent: 	-999em;
+	overflow:		hidden;
+	background:		url('../images/arrows-ffffff.gif') 0px 0px no-repeat  ; /* 8-bit indexed alpha png. IE6 gets solid image only */
+	/*background:		url('../images/arrows-ffffff.png') repeat-x 0px -200px;*/ /* 8-bit indexed alpha png. IE6 gets solid image only */
+}
+a > .sf-sub-indicator {  /* give all except IE6 the correct values */
+	top:			.8em;
+	background-position: 0 -100px; /* use translucent arrow for modern browsers*/
+}
+a:focus > .sf-sub-indicator,
+a:hover > .sf-sub-indicator,
+a:active > .sf-sub-indicator,
+li:hover > a > .sf-sub-indicator,
+li.sfHover > a > .sf-sub-indicator {
+	/*background-position: -10px -100px; *//* arrow hovers for modern browsers*/
+}
+
+/* point right for anchors in subs */
+.sf-menu ul .sf-sub-indicator { background-position:  -10px 0; }
+.sf-menu ul a > .sf-sub-indicator { background-position:  0 0; }
+/* apply hovers to modern browsers */
+.sf-menu ul a:focus > .sf-sub-indicator,
+.sf-menu ul a:hover > .sf-sub-indicator,
+.sf-menu ul a:active > .sf-sub-indicator,
+.sf-menu ul li:hover > a > .sf-sub-indicator,
+.sf-menu ul li.sfHover > a > .sf-sub-indicator {
+	background-position: -10px 0; /* arrow hovers for modern browsers*/
+}

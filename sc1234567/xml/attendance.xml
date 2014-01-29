@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<attendance>
+  <course>
+    <class>IX</class>
+    <totalboys>1</totalboys>
+    <totalgirls>1</totalgirls>
+    <total>2</total>
+    <totalboysattend>0</totalboysattend>
+    <totalgirlsattend>1</totalgirlsattend>
+    <totalattend>1</totalattend>
+    <totalpercent>50.0000</totalpercent>
+  </course>
+  <course>
+    <class>X</class>
+    <totalboys>3</totalboys>
+    <totalgirls>3</totalgirls>
+    <total>6</total>
+    <totalboysattend>2</totalboysattend>
+    <totalgirlsattend>2</totalgirlsattend>
+    <totalattend>4</totalattend>
+    <totalpercent>66.6667</totalpercent>
+  </course>
+</attendance>
