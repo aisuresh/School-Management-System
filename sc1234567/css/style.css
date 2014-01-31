@@ -159,7 +159,7 @@ table.todayinfo_tbl tr td.info #sendmail{ width:180px; height:25px; font-weight:
 
 #message1{width:28%; height:23px; padding-left:35px; padding-top:6px; font-size:14px; font-weight:bold; text-align:left; color:#009900; border:1px solid #006600; background:#DFFFE8 url(../images/OK.png) 5px 2px no-repeat; -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px; 
 behavior: url(css/border-radius.htc); display:none;}
-#message{width:28%; height:23px; padding-left:35px; padding-top:6px; font-size:14px; font-weight:bold; text-align:left; color:#FF0000; border:1px solid #FF0000; background:#FFD9D9 url(../images/NO.png) 5px 2px no-repeat; -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px; behavior: url(css/border-radius.htc); display:none;}
+#message{width:40%; height:23px; padding-left:35px; padding-top:6px; font-size:14px; font-weight:bold; text-align:left; color:#FF0000; border:1px solid #FF0000; background:#FFD9D9 url(../images/NO.png) 5px 2px no-repeat; -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px; behavior: url(css/border-radius.htc); display:none;}
 #mandatory{ width:50%; height:20px; text-align:right; margin-top:5px;}
 
 table#record_tbl{ border:1px solid #6ea8d2}

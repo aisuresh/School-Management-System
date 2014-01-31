@@ -117,11 +117,8 @@ function validation(){
 	 var StudentId = $('#StudentId').val();
 	 var ClassId = $('#ClassId').val();
 	 var SectionId = $('#SectionId').val();
-	 var marksarray;
-	 var i=0;
 	 
-	 	 
-	   if(ExamTypeId == 'x'){
+	 if(ExamTypeId == 'x'){
 		$('#message').html('Exam Type should not be blank').show().fadeOut('slow').fadeIn('slow');
 		$('#ExamTypeId').focus();
 		return false;
@@ -137,32 +134,36 @@ function validation(){
 		$('#message').html('Student should not be blank').show().fadeOut('slow').fadeIn('slow');
 		$('#StudentId').focus();
 		return false;
-	}else 
+	}else  
 		 {
    			var validation=true; 
 			var maxmarks =$('#ExamMarks').text().trim();
-			
+			var marksarray;
+	 		var i=0;
   			 $('input[type="text"]').each(function(i){
-			 
+			 //var j=i;
   					marksarray =  $(this).val();
 				if(marksarray == ''){
 						$('#message').html('Mark should not be blank').show().fadeOut('slow').fadeIn('slow');        
 						//$(this).attr('name').focus();
-						alert("mark-"+marksarray+"-");
+						
+						
+						//alert("mark-"+marksarray+"-");
 						validation = false;
 						//return false;
 						   
-				  }/*else 
+				  } 
 				  if(marksarray > maxmarks){
     						$('#message').html('Mark can not be greater than maximum mark').show().fadeOut('slow').fadeIn('slow');
-							//$(this).focus();
+							
+							//(this).attr('name').focus();
 							alert("mark1-"+marksarray+"-");
 							alert("max-"+maxmarks+"-");
 							validation = false;
 							//return false;
-							
-					}*/
-			}); i++;
+						
+					}i++;	
+			}); 
 			
 			alert(validation);
 			return validation;

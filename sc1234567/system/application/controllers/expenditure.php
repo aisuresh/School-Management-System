@@ -375,7 +375,7 @@ class Expenditure extends Controller
 	function export()
 	{
 		header("Content-type: application/octet-stream");
-        header("Content-Disposition: attachment; filename = ClassFees.xls");
+        header("Content-Disposition: attachment; filename = Expenditure.xls");
         header("Pragma: no-cache");
         header("Expires: 0");
 		$yearno = $this->Adminmodel->maxvalue($table = 'academicyear', $fields = array('AcademicYear'), $where = array());
@@ -384,21 +384,26 @@ class Expenditure extends Controller
 				$year = $yno->AcademicYear;
 			}
 		}
-		$table = 'classfees';
-		/*$tableArray = array(
-			array('TableName' => 'course', 'CompairField' => $table.'.ClassId = course.ClassId' )
+		$table = 'expenditure';
+		$tableArray = array(
+			array('TableName' => 'expendituretype', 'CompairField' => 'expendituretype.ExpenditureTypeId=expenditure.ExpenditureTypeId'),
 		);
 		$where = array(
 			 array('condition' => $table.'.Year', 'value' => $year)
 		);
-		$result = $this->Adminmodel->fetch_row($table, $tableArray, $where );*/
-		$result=$this->Adminmodel->export_records($table);
+		$result = $this->Adminmodel->fetch_row($table, $tableArray, $where );
+		//$result=$this->Adminmodel->export_records($table);
 		echo "<table class ='master_view_tbl' cellspacing='0' cellpadding='0'>";
 		echo "<tr style='font-size:12px; font-weight:bold; color:#3e4341; border-right:1px solid #a4a9a8; background-color:#b3c1bb; height:30px; text-align:center;'>";
 		echo "<th> SNO </th>";
-		echo "<th align='center' >Academic Year</th>";
-		//echo "<th align='center' >Class</th>";
-		echo "<th align='center' >Class Fees</th>";
+		echo "<th align='center' >ExpenditureType</th>";
+		echo "<th align='center' >BillNo</th>";
+		echo "<th align='center' >BillAmount</th>";
+		echo "<th align='center' >BillDate</th>";
+		echo "<th align='center' >SpentBy</th>";
+		//echo "<th align='center' >ReceivedBy</th>";
+		echo "<th align='center' >Year</th>";
+		echo "<th align='center' >Justification</th>";
 		echo "</tr>";
 		$i= 1;
 		foreach($result as $row):
@@ -409,10 +414,16 @@ class Expenditure extends Controller
 		}
 		
 		echo "<tr style='" . $master_tr_bgcolor . "'>";
-		echo "<td style='padding:5px; text-align:center; ' >" . $i ++ . "</td>";  
+		echo "<td style='padding:5px; text-align:center; ' >" . $i++ . "</td>";  
+		echo "<td align='center'>" . $row->ExpenditureType . "</td>";
+		echo "<td align='center'>" . $row->BillNo . "</td>";
+		echo "<td align='center'>" . $row->BillAmount . "</td>";
+		echo "<td align='center'>" . $row->BillDate . "</td>";
+		echo "<td align='center'>" . $row->SpentBy . "</td>";
+		//echo "<td align='center'>" . $row->ReceivedBy . "</td>";
 		echo "<td align='center'>" . $row->Year . "</td>";
-		//echo "<td align='center'>" . $row->ClassName . "</td>";
-		echo "<td align='center'>" . $row->ClassFees . "</td>";
+		echo "<td align='center'>" . $row->Justification . "</td>";
+		//echo "<td align='center'>" . $row->ClassFees . "</td>";
 		echo "</tr>";		
 			endforeach;
 		echo "</table>";

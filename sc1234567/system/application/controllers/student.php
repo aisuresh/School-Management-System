@@ -450,8 +450,8 @@ class Student extends Controller
 					$table = 'studentfees';
 					for($i = 1; $i <= 3; $i++){
 						$data = array(
-						    'InstituteId' =>  $this->session->userdata('InstituteId'),
-						    'StudentId' => $StudentId,
+						   'InstituteId' =>  $this->session->userdata('InstituteId'),
+						   'StudentId' => $StudentId,
 						   'FeesTypeId' => ($i),
 						   'Fees' => $fees[($i-1)],
 						   'Year' => $year
@@ -1010,19 +1010,21 @@ class Student extends Controller
 		$data = new Spreadsheet_Excel_Reader();
 		$data->setOutputEncoding('UTF-8');
 		$data->read($file_path);
+		
 		if($data->sheets[0]['numCols'] != 20){
 			echo 'invalid'; 
 			exit;
-		}	
+		}
+		
+		if($data->sheets[0]['numRows'] < 2){
+			echo 'no rows';
+			exit;
+		}		
+		$numberOfRowsInserted = 0;
+		
 		$table = 'student';
 		$info = array('InstituteId','StudentRollNo','StudentName', 'FatherName', 'MotherName', 'FatherAccupation', 'MotherAccupation', 'DateOfBirth', 'Gender', 'Town', 'Cast', 'CastCategoryId', 'NationalityId','MotherTongueId', 'PH', 'Address', 'PhoneNo', 'MobileNo', 'Email', 'OnTC','BloodGroupId');
 		error_reporting(E_ALL ^ E_NOTICE);
-		
-		$numberOfRowsInserted = 0;
-		if($data->sheets[0]['numRows'] == 2){
-			echo 'no rows';
-			exit;
-		}
 				
 		for ($i = 2; $i <= $data->sheets[0]['numRows']; $i++) {
 			 $validation = true;
@@ -1311,40 +1313,31 @@ class Student extends Controller
 					   break;
 					 default:
 		   			   break;
-			      }
-				 // $k++;
-				
-				  
-				}
-				
-				
+			    }  
+			} // end of for loop for column. i.e read one record
 			
-				//print($validation);exit;
 			  if($validation) {			
-			     $table = 'student';      
+			     $table = 'student';   
 				 $where = array(
 					array('condition' => $table.'.StudentRollNo', 'value' =>$rollno),
 					array('condition' => $table.'.StudentName', 'value' =>$studentname),
 					array('condition' => $table.'.FatherName', 'value' =>$fathername)
 					//array('condition' => $table.'.DateOfBirth', 'value' =>$DateOfBirth),
 				 );	
-				 $result = $this->Adminmodel->show_rows($table, $where);
-				// print_r($result);
-				if(!isset($result) && $result <= 0){	
-     				  $datainfo[$info[0]] =  $this->session->userdata('InstituteId');
+				$result = $this->Adminmodel->show_rows($table, $where);
+
+					if(!isset($result) && $result <= 0){	
+					  $datainfo[$info[0]] =  $this->session->userdata('InstituteId');
 					  $status = $this->Adminmodel->save_data($datainfo, $table);
 					  if($status){
 						$numberOfRowsInserted = $numberOfRowsInserted + 1; 
 					  }
-				  }else{
-			       echo 2;
-				   exit;
+					}
+				}else{
+				 	echo 'validation error-' . ($i-1);
+			     	exit;	
 				}
-		}else{
-		 echo 'validation error-' . ($i-1);
-	     exit;	
-		}
-		  }
+		  }// end of for loop for row. i.e read all records
 				         
 		if($numberOfRowsInserted == 0){
 			echo 'no rows';
@@ -1353,36 +1346,34 @@ class Student extends Controller
 		}else{
 			echo 'error';
 		}
-			
-		
-		
 	}
-	 public function excelDateCorrect($data){
-								if ($data < 1) {
-									return "";
-									}
-									if ($data == 60) {
-									return "1900-02-29";
-									}
-									// because of 1900 leap year bug, all dates after are 1 day off
-									else {
-									if ($data < 60) {
-									$data++;
-									}
-									// Modified Julian to DMY calculation with an addition of 2415019
-									$l = $data + 68569 + 2415019;
-									$n = floor(( 4 * $l ) / 146097);
-									$l = $l - floor(( 146097 * $n + 3 ) / 4);
-									$i = floor(( 4000 * ( $l + 1 ) ) / 1461001);
-									$l = $l - floor(( 1461 * $i ) / 4) + 31;
-									$j = floor(( 80 * $l ) / 2447);
-									$nDay = $l - floor(( 2447 * $j ) / 80);
-									$l = floor($j / 11);
-									$nMonth = $j + 2 - ( 12 * $l );
-									$nYear = 100 * ( $n - 49 ) + $i + $l;
-									return (string)$nYear."-".$nMonth."-".$nDay;
-							}
-							}
+	
+	function excelDateCorrect($data){
+		if ($data < 1) {
+			return "";
+		}
+		if ($data == 60) {
+			return "1900-02-29";
+		}
+		// because of 1900 leap year bug, all dates after are 1 day off
+		else {
+			if ($data < 60) {
+				$data++;
+			}
+			// Modified Julian to DMY calculation with an addition of 2415019
+			$l = $data + 68569 + 2415019;
+			$n = floor(( 4 * $l ) / 146097);
+			$l = $l - floor(( 146097 * $n + 3 ) / 4);
+			$i = floor(( 4000 * ( $l + 1 ) ) / 1461001);
+			$l = $l - floor(( 1461 * $i ) / 4) + 31;
+			$j = floor(( 80 * $l ) / 2447);
+			$nDay = $l - floor(( 2447 * $j ) / 80);
+			$l = floor($j / 11);
+			$nMonth = $j + 2 - ( 12 * $l );
+			$nYear = 100 * ( $n - 49 ) + $i + $l;
+		  return (string)$nYear."-".$nMonth."-".$nDay;
+		}
+	}
 	
 	function uploadstudentclass(){
 		$filename = basename($_FILES['uploadfile']['name']); 
@@ -1402,66 +1393,153 @@ class Student extends Controller
 		$data = new Spreadsheet_Excel_Reader();
 		$data->setOutputEncoding('UTF-8');
 		$data->read($file_path);
-	    if($data->sheets[0]['numCols'] != 18){
-			echo 'invalid'; 
+		$numberOfRowsInserted = 0;
+		
+		if($data->sheets[0]['numCols'] != 6){
+			echo 'invalid';
 			exit;
-		}	
+		}
+		
+		if($data->sheets[0]['numRows'] < 2){
+			echo 'no rows';
+			exit;
+		}
+		$numberOfRowsInserted = 0;
 		
 		$table = 'studentclass';
-		$class = array('StudentId','Medium', 'StudentClass', 'SectionId','Year');
-		//print_r($class);
+		$info = array('InstituteId','StudentId','RollNo','Medium','StudentClass','SectionId','Year');
 		error_reporting(E_ALL ^ E_NOTICE);
+		
 		for ($i = 2; $i <= $data->sheets[0]['numRows']; $i++) {
+			$validation = true;
 			for ($j = 1; $j <= $data->sheets[0]['numCols']; $j++) {
-				if($data->sheets[0]['cells'][$i][$j] == 'Telugu'){
-					$datainfo[$class[$j-1]] = 1;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'English'){
-					$datainfo[$class[$j-1]] = 2;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'Nursery'){
-					$datainfo[$class[$j-1]] = 1;	
-				}else if($data->sheets[0]['cells'][$i][$j] == 'LKG'){
-					$datainfo[$class[$j-1]] = 2;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'UKG'){
-					$datainfo[$class[$j-1]] = 3;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'I'){
-					$datainfo[$class[$j-1]] = 4;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'II'){
-					$datainfo[$class[$j-1]] = 5;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'III'){
-					$datainfo[$class[$j-1]] = 6;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'IV'){
-					$datainfo[$class[$j-1]] = 7;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'V'){
-					$datainfo[$class[$j-1]] = 8;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'VI'){
-					$datainfo[$class[$j-1]] = 9;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'VII'){
-					$datainfo[$class[$j-1]] = 10;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'VIII'){
-					$datainfo[$class[$j-1]] = 11;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'IX'){
-					$datainfo[$class[$j-1]] = 12;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'X'){
-					$datainfo[$class[$j-1]] = 13;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'A'){
-					$datainfo[$class[$j-1]] = 1;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'B'){
-					$datainfo[$class[$j-1]] = 2;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'C'){
-					$datainfo[$class[$j-1]] = 3;
-		        }else{
-					$datainfo[$class[$j-1]] = $data->sheets[0]['cells'][$i][$j];
-				}	
+				switch ($j)
+				 { 
+                    case 1: // StudentRollNo
+					   if($data->sheets[0]['cells'][$i][$j] == ''){
+					     $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows'];
+					   }else if(!preg_match('/^[0-9]*$/', $data->sheets[0]['cells'][$i][$j])){
+					     $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows'];
+						}
+					   $datainfo[$info[$j]] = $data->sheets[0]['cells'][$i][$j];
+					   $studentid = $datainfo[$info[$j]];					   
+					   break;
+					 case 2:
+					   if($data->sheets[0]['cells'][$i][$j] == ''){
+						 $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows'];
+					   }else if(!preg_match('/^[0-9]*$/', $data->sheets[0]['cells'][$i][$j])){
+					     $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows']; 		
+						}
+					   //  print($validation);exit;						
+					   $datainfo[$info[$j]] = $data->sheets[0]['cells'][$i][$j];					   	
+					   // print($validation);
+					   break;					  
+			        case 3:
+					   if($data->sheets[0]['cells'][$i][$j] == 'Select'){
+						  $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows']; 
+					  }else{
+					     if($data->sheets[0]['cells'][$i][$j] == 'Tamil'){
+						   $datainfo[$info[$j]] = 1;
+						 }else if($data->sheets[0]['cells'][$i][$j] == 'English'){
+						   $datainfo[$info[$j]] = 2;
+						 }
+					   }
+					   //print($validation);
+					   break;
+					 case 4:
+					   if($data->sheets[0]['cells'][$i][$j] == 'Select'){
+						  $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows'];  
+					   }else{
+						if($data->sheets[0]['cells'][$i][$j] == 'Nursery'){
+							$datainfo[$info[$j]] = 1;
+						 }else if($data->sheets[0]['cells'][$i][$j] == 'LKG'){
+							$datainfo[$info[$j]] = 2;
+						 }else if($data->sheets[0]['cells'][$i][$j] == 'UKG'){
+							$datainfo[$info[$j]] = 3;
+						 }else if($data->sheets[0]['cells'][$i][$j] == 'I'){
+							$datainfo[$info[$j]] = 4;
+						 }else if($data->sheets[0]['cells'][$i][$j] == 'II'){
+							$datainfo[$info[$j]] = 5;
+						 }else if($data->sheets[0]['cells'][$i][$j] == 'III'){
+							$datainfo[$info[$j]] = 6;					
+						 }else if($data->sheets[0]['cells'][$i][$j] == 'IV'){
+							$datainfo[$info[$j]] = 7;					
+						 }else if($data->sheets[0]['cells'][$i][$j] == 'V'){
+							$datainfo[$info[$j]] = 8;					
+						 }
+					   }
+					   $class = $datainfo[$info[$j]];
+					   break;
+					 case 5:
+					   if($data->sheets[0]['cells'][$i][$j] == 'Select'){
+						  $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows'];  
+					   }else{
+					     if($data->sheets[0]['cells'][$i][$j] == 'A'){
+							$datainfo[$info[$j]] = 1;
+						 }else if($data->sheets[0]['cells'][$i][$j] == 'B'){
+							$datainfo[$info[$j]] = 2;
+						 }else if($data->sheets[0]['cells'][$i][$j] == 'C'){
+							$datainfo[$info[$j]] = 3;
+					     }
+					   }
+					   $section = $datainfo[$info[$j]];
+					  break;
+					 case 6:
+					   if($data->sheets[0]['cells'][$i][$j] == ''){
+						 $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows'];   
+					   }
+					   $datainfo[$info[$j]] = $data->sheets[0]['cells'][$i][$j];
+					  break;
+					 default:
+		   			  break;
+				}
+			} // end of for loop for column. i.e read one record
+			
+			if($validation) {
+ 		     $table = 'studentclass';      
+			 $where = array(
+				array('condition' => $table.'.StudentId', 'value' =>$studentid),
+				array('condition' => $table.'.StudentClass', 'value' =>$class),
+				array('condition' => $table.'.SectionId', 'value' =>$section)
+			 );
+			 $result = $this->Adminmodel->show_rows($table, $where);
+ 			 
+				 if(!isset($result) && $result <= 0){
+	     			  $datainfo[$info[0]] =  $this->session->userdata('InstituteId');
+					  $status = $this->Adminmodel->save_data($datainfo, $table);
+					  if($status){
+						$numberOfRowsInserted = $numberOfRowsInserted + 1; 
+					  }
+				}
+			}else{
+				echo 'validation error-' . ($i-1);
+				exit;
 			}
-			//print_r($datainfo);
-			$status = $this->Adminmodel->save_data($datainfo, $table);
-		}
-		//echo($status);exit;
-		if($status){
+		}// end of for loop for row. i.e read all records
+				         
+		if($numberOfRowsInserted == 0){
+			echo 'no rows';
+		}else if($numberOfRowsInserted > 0){
 			echo $filename;
 		}else{
 			echo 'error';
-		}	
+		}
 	}
 	
 	function uploadstudentfees(){
@@ -1483,30 +1561,104 @@ class Student extends Controller
 		$data->setOutputEncoding('UTF-8');
 		$data->read($file_path);
 		//echo($data->sheets[0]['numCols']);
-		if($data->sheets[0]['numCols'] != 18){
+		if($data->sheets[0]['numCols'] !=6){
 			echo 'invalid'; 
 			exit;
 		}	
+		if($data->sheets[0]['numRows'] < 2){
+			echo 'no rows';
+			exit;
+		}
+		$numberOfRowsInserted = 0;
 		$table = 'studentfees';
-		$fees = array('StudentId', 'FeesTypeId', 'Fees', 'Year');
+		$fees = array('InstituteId','StudentId','FeesTypeId','Fees','Year');
 		error_reporting(E_ALL ^ E_NOTICE);
 		for ($i = 2; $i <= $data->sheets[0]['numRows']; $i++) {
+		 	 $validation = true;
 			for ($j = 1; $j <= $data->sheets[0]['numCols']; $j++) {
-				if($data->sheets[0]['cells'][$i][$j] == 'Admission Fees'){
-					$datainfo[$fees[$j-1]] = 1;
-				}else if($data->sheets[0]['cells'][$i][$j] == 'Bus Fees'){
-					$datainfo[$fees[$j-1]] = 2;
-				}else{
-					$datainfo[$fees[$j-1]] = $data->sheets[0]['cells'][$i][$j];
-				}	
+			    switch ($j)
+				 { 
+                    case 1: 
+					   if($data->sheets[0]['cells'][$i][$j] == ''){
+					     $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows'];
+					   }else if(!preg_match('/^[0-9]*$/', $data->sheets[0]['cells'][$i][$j])){
+					     $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows'];
+						}
+					   $datainfo[$fees[$j]] = $data->sheets[0]['cells'][$i][$j];
+					   $studentid = $datainfo[$info[$j]];					   
+					   break;
+					 case 2:
+					   if($data->sheets[0]['cells'][$i][$j] == 'Select'){
+						 $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows'];
+					   }else{
+					     if($data->sheets[0]['cells'][$i][$j] =='Admission Fees'){
+								$datainfo[$fees[$j]] = 1;
+						}else if($data->sheets[0]['cells'][$i][$j] =='Bus Fees'){
+								$datainfo[$fees[$j]] = 2;
+						}else if($data->sheets[0]['cells'][$i][$j] =='School Fees'){
+								$datainfo[$fees[$j]] = 3;
+						}
+						}						   	
+					   break;					  
+			        case 3:
+					   if($data->sheets[0]['cells'][$i][$j] == ''){
+						  $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows']; 
+					  }else if(!preg_match('/^[0-9]*$/', $data->sheets[0]['cells'][$i][$j])){
+					     $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows']; 		
+						}
+					   $datainfo[$fees[$j]] = $data->sheets[0]['cells'][$i][$j];		
+					   break;
+					 case 4:
+					   if($data->sheets[0]['cells'][$i][$j] == ''){
+						  $validation = false;
+						 $j = $data->sheets[0]['numCols'];
+						 $i = $data->sheets[0]['numRows']; 
+					  }
+					   $datainfo[$fees[$j]] = $data->sheets[0]['cells'][$i][$j];		
+					  break;
+					  default:
+		   			  break;
+				}
+				
 			}
-			$status = $this->Adminmodel->save_data($datainfo, $table);
-		}
-		if($status){
+			if($validation) {
+ 		     $table = 'studentfees';      
+			 $where = array(
+				array('condition' => $table.'.StudentId', 'value' =>$studentid),
+				array('condition' => $table.'.FeesTypeId', 'value' =>$class)
+			 );
+			 $result = $this->Adminmodel->show_rows($table, $where);
+ 			 
+				 if(!isset($result) && $result <= 0){
+	     			  $datainfo[$fees[0]] =  $this->session->userdata('InstituteId');
+					  $status = $this->Adminmodel->save_data($datainfo, $table);
+					  if($status){
+						$numberOfRowsInserted = $numberOfRowsInserted + 1; 
+					  }
+				}
+			}else{
+				echo 'validation error-' . ($i-1);
+				exit;
+			}
+		}// end of for loop for row. i.e read all records
+		
+		if($numberOfRowsInserted == 0){
+			echo 'no rows';
+		}else if($numberOfRowsInserted > 0){
 			echo $filename;
 		}else{
 			echo 'error';
-		}	
+		}
 	}
 
 	
@@ -1534,26 +1686,26 @@ class Student extends Controller
 		echo "<table class ='master_view_tbl' cellspacing='0' cellpadding='0'>";
 		echo "<tr style='font-size:12px; font-weight:bold; color:#3e4341; border-right:1px solid #a4a9a8; background-color:#b3c1bb; height:30px; text-align:center;'>";
 		echo "<th> SNO </th>";
-echo "<th align='center' >Roll No</th>";
-echo "<th align='center' >Student Name</th>";
-echo "<th align='center' >Father Name</th>";
-echo "<th align='center' >Mother Name</th>";
-echo "<th align='center' >Father Occupation</th>";
-echo "<th align='center' >Mother Occupation</th>";
-echo "<th align='center' >Date of Birth</th>";
-echo "<th align='center' >Gender</th>";
-echo "<th align='center' >Village / Town</th>";
-echo "<th align='center' >Cast</th>";
-echo "<th align='center' >Cast Category</th>";
-echo "<th align='center' >Nationality</th>";
-echo "<th align='center' >MotherTongue</th>";
-echo "<th align='center' >PH</th>";
-echo "<th align='center' >Address</th>";
-echo "<th align='center' >Phone No</th>";
-echo "<th align='center' >Mobile No</th>";
-echo "<th align='center' >Email</th>";
-echo "<th align='center' >On TC</th>";
-echo "<th align='center' >BloodGroup</th>";
+		echo "<th align='center' >Roll No</th>";
+		echo "<th align='center' >Student Name</th>";
+		echo "<th align='center' >Father Name</th>";
+		echo "<th align='center' >Mother Name</th>";
+		echo "<th align='center' >Father Occupation</th>";
+		echo "<th align='center' >Mother Occupation</th>";
+		echo "<th align='center' >Date of Birth</th>";
+		echo "<th align='center' >Gender</th>";
+		echo "<th align='center' >Village / Town</th>";
+		echo "<th align='center' >Cast</th>";
+		echo "<th align='center' >Cast Category</th>";
+		echo "<th align='center' >Nationality</th>";
+		echo "<th align='center' >MotherTongue</th>";
+		echo "<th align='center' >PH</th>";
+		echo "<th align='center' >Address</th>";
+		echo "<th align='center' >Phone No</th>";
+		echo "<th align='center' >Mobile No</th>";
+		echo "<th align='center' >Email</th>";
+		echo "<th align='center' >On TC</th>";
+		echo "<th align='center' >BloodGroup</th>";
 		echo "</tr>";
 		$i= 1;
 		foreach($result as $row):

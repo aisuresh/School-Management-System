@@ -425,7 +425,12 @@ class Staff extends Controller
         header("Content-Disposition: attachment; filename = Staff.xls");
         header("Pragma: no-cache");
         header("Expires: 0");
-		$result = $this->Adminmodel->export_records($table);
+		$tableArray= array(
+						array('TableName' => 'stafftype', 'CompairField' => 'stafftype.StaffTypeId=staff.StaffTypeId'),
+						array('TableName' => 'qualification', 'CompairField' => 'qualification.QualificationId=staff.QualificationId')
+						//array('TableName' => 'qualification', 'CompairField' => 'qualification.QualificationId=staff.QualificationId'),
+		);
+	$result = $this->Adminmodel->fetch_row($table, $tableArray, $where=array());
 		echo "<table class ='master_view_tbl' cellspacing='0' cellpadding='0'>";
 		echo "<tr style='font-size:12px; font-weight:bold; color:#3e4341; border-right:1px solid #a4a9a8; background-color:#b3c1bb; height:30px; text-align:center;'>";
 		echo "<th> SNO </th>";
@@ -434,11 +439,12 @@ class Staff extends Controller
 		echo "<th align='center' >Gender</th>";
 		echo "<th align='center' >DateOfBirth</th>";
 		echo "<th align='center' >Qualification</th>";
-		echo "<th align='center' >Experiance</th>";
+		echo "<th align='center' >TotalExperiance</th>";
+		echo "<th align='center' >Month</th>";
+		echo "<th align='center' >JobType</th>";
 		echo "<th align='center' >Subject01</th>";
 		echo "<th align='center' >Subject02</th>";
 		echo "<th align='center' >Subject03</th>";
-		echo "<th align='center' >Subject04</th>";
 		echo "<th align='center' >PhoneNo</th>";
 		echo "<th align='center' >MobileNo</th>";
 		echo "<th align='center' >Email</th>";
@@ -456,17 +462,18 @@ class Staff extends Controller
 		}
 		
 		echo "<tr style='" . $master_tr_bgcolor . "'>";
-		echo "<td style='padding:5px; text-align:center; ' >" . $i ++ . "</td>";  
+		echo "<td style='padding:5px; text-align:center; ' >" . $i++ . "</td>";  
 		echo "<td align='center'>" . $row->StaffName . "</td>";
-		echo "<td align='center'>" . $row->StaffTypeId . "</td>";
+		echo "<td align='center'>" . $row->StaffType . "</td>";
 		echo "<td align='center'>" . $row->Gender . "</td>";
 		echo "<td align='center'>" . $row->DateOfBirth . "</td>";
-		echo "<td align='center'>" . $row->Qualification . "</td>";
-		echo "<td align='center'>" . $row->Experiance . "</td>";
+		echo "<td align='center'>" . $row->graduation . "</td>";
+		echo "<td align='center'>" . $row->TotalExperiance . "</td>";
+		echo "<td align='center'>" . $row->Month . "</td>";
+		echo "<td align='center'>" . $row->JobType . "</td>";
 		echo "<td align='center'>" . $row->Subject01 . "</td>";
 		echo "<td align='center'>" . $row->Subject02 . "</td>";
 		echo "<td align='center'>" . $row->Subject03 . "</td>";
-		echo "<td align='center'>" . $row->Subject04 . "</td>";
 		echo "<td align='center'>" . $row->PhoneNo . "</td>";
 		echo "<td align='center'>" . $row->MobileNo . "</td>";
 		echo "<td align='center'>" . $row->Email . "</td>";

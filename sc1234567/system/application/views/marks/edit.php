@@ -38,7 +38,7 @@ echo "</div>";
 echo "<div align='center' class='content'>";
 echo "<span class = 'mandatory'>*</span> Specipied fileds are mandatory";
 echo "<table  border='0' cellpadding='0' cellspacing = '0' class='formtable'>";
-var_dump($result);
+//var_dump($result);
 foreach($result as $row):
 echo "<input type='hidden' name = 'MarksId' id = 'MarksId' value = '".$row->MarksId."' />";
 
@@ -46,9 +46,19 @@ echo "<tr>";
 echo "<td align='right' width='15%' class = 'datafield' >ExamType<span class = 'mandatory'>*</span></td>";
 echo "<td width='2%' class='spacetd' > </td>";
 echo "<td width='10%' class = 'dataview' >";
-echo "<select name = 'ExamTypeId' id = 'ExamTypeId'>";
+echo "<select name = 'ExamTypeId' id = 'ExamTypeId' onchange='exammarks();'>";
 echo "<option value = 'x'>- - Select ExamType - -</option>";
-echo "<option value = '".$row->ExamTypeId."' selected='selected' >".$row->ExamType."</option>";
+foreach($examtype as $ex){
+	if($row->ExamTypeId == $ex->ExamId){
+		echo "<option value = '".$ex->ExamId."' selected>";
+		echo $ex->ExamType;
+		echo "</option>";
+	}else{
+		echo "<option value = '".$ex->ExamId."' >";
+		echo $ex->ExamType;
+		echo "</option>";
+	}
+}
 echo "</select>";
 echo "</td></tr>";
 
@@ -62,7 +72,7 @@ echo "<tr>";
 echo "<td align='right' width='15%' class = 'datafield' >Class<span class = 'mandatory'>*</span></td>";
 echo "<td width='2%' class='spacetd' > </td>";
 echo "<td width='10%' class = 'dataview' >";
-echo "<select name = 'ClassId' id = 'ClassId' >";
+echo "<select name = 'ClassId' id = 'ClassId' onchange = 'section_fun();' >";
 echo "<option value = 'x'>- - Select Class - -</option>";
 foreach($course as $co){
 	if($row->StudentClass == $co->ClassId){
@@ -84,7 +94,7 @@ echo "<tr>";
 echo "<td align='right' width='15%' class = 'datafield' >Section<span class = 'mandatory'>*</span></td>";
 echo "<td width='2%' class='spacetd' > </td>";
 echo "<td width='10%' class = 'dataview' >";
-echo "<select name = 'SectionId' id = 'SectionId'>";
+echo "<select name = 'SectionId' id = 'SectionId' onchange = 'studentlist_fun();'>";
 echo "<option value = 'x'>- - Select Section - -</option>";
 foreach($section as $sc){
 	if($row->SectionId == $sc->SectionId){
@@ -107,9 +117,17 @@ echo "<td width='2%' class='spacetd' > </td>";
 echo "<td width='10%' class = 'dataview' >";
 echo "<select name = 'StudentId' id = 'StudentId'>";
 echo "<option value = 'x'>- - Select RollNo - -</option>";
-echo "<option value = '".$row->StudentId."' selected >";
-echo $row->RollNo;
-echo "</option>";
+foreach($studentclass as $stu){
+	if($row->RollNo == $stu->RollNo){
+		echo "<option value = '".$stu->StudentId."' selected >";
+		echo $stu->RollNo;
+		echo "</option>";
+	}else{
+		echo "<option value = '".$stu->StudentId."' >";
+		echo $stu->RollNo;
+		echo "</option>";
+	}
+}
 echo "</select>";
 echo "</td></tr>";
 endforeach;
@@ -123,13 +141,8 @@ $i=1;
 foreach($result as $row):
 $markarray = explode(',', $row->Marks);	
 $subarray = explode(',', $row->SubjectId);	
-$i=0;
-foreach($subject as $rowa):
-
-	$sujectarray[$i]=$rowa->SubjectName;
-	$i++;
-endforeach;
 $combinearray=array_combine($subarray,$markarray);
+
 foreach($combinearray as $com=>$value):
 echo "<tr>";
 echo "<td align='right' width='15%' class = 'datafield' ><label for='sub' name='sub' id='sub' >";
@@ -146,12 +159,16 @@ echo "</td>";
 //echo "<td width='2%' class='spacetd' > </td>";
  
 echo "<td width='15%' class = 'dataview' id = 'showstatus'  >";
-echo "<label id='status".$i."' name='status'  ><font color='red'> </font>	</label>";
+echo "<label id='status".$i."' name='status'  >";
+if($value>=35)
+echo "<span style='font-size:12px; color:green;'>Pass</span></label>";
+else
+echo "<span style='font-size:12px; color:red;'>Fail</span></label>";
 echo "</td>";
-
 echo "</tr>";
-endforeach; 
 $i++;
+endforeach; 
+
 endforeach;
 
 echo "</table>";
@@ -161,22 +178,43 @@ echo "</div>";
 echo "</div>";
 ?>
 <script>
+$(document).ready(
+  function() {
+      //var mark = $('#'+markid).val();
+	  //alert(mark);
+   
+      $('input[type=text]').change(
+      function(){
+	    	  
+	    var markid = $(this).attr('name');
+		//alert(markid);
+		var id = markid.substring(4, markid.length);
+        mark = $('#'+markid).val();
+		//alert(mark);
+		if(mark >= 35){
+		 $('#status'+id).text('Pass');
+		 //$('#status33'+id).css("color","green");
+		  $('#status'+id).css({"color":"green","font-family":"Arial","font-size":"12px"});
+		}else {
+		 $('#status'+id).text('Fail');
+		$('#status'+id).css({"color":"red","font-family":"Arial","font-size":"12px"});
+		}
+	    	
+      }
+      );
+  }
+  );
+
 
 function validation(){
-	 var MarksId = $('#MarksId').val();
+	 
 	 var ExamTypeId = $('#ExamTypeId').val();
 	 var StudentId = $('#StudentId').val();
 	 var ClassId = $('#ClassId').val();
 	 var SectionId = $('#SectionId').val();
-	 var marksarray;
-	 var i=0;
-	 
-	 	 
-	    if(MarksId == ''){
-		$('#message').html('MarksId Type should not be blank').show().fadeOut('slow').fadeIn('slow');
-		$('#MarksId').focus();
-		return false;
-	}else if(ExamTypeId == 'x'){
+	 	 	 
+	    
+	   if(ExamTypeId == 'x'){
 		$('#message').html('Exam Type should not be blank').show().fadeOut('slow').fadeIn('slow');
 		$('#ExamTypeId').focus();
 		return false;
@@ -196,14 +234,17 @@ function validation(){
 		 {
    			var validation=true; 
 			var maxmarks =$('#ExamMarks').text().trim();
-			
+			var marksarray;
+	        var i=0;
+	 
   			 $('input[type="text"]').each(function(i){
 			 
   					marksarray =  $(this).val();
-				if(marksarray == ''){
-						$('#message').html('Mark should not be blank').show().fadeOut('slow').fadeIn('slow');        
+					if(marksarray == '' || marksarray > maxmarks){
+						$('#message').html('Mark should not be greater than maximum mark').show().fadeOut('slow').fadeIn('slow');       
+						$(this).focus(); 
 						//$(this).attr('name').focus();
-						alert("mark-"+marksarray+"-");
+						//alert("mark-"+marksarray+"-");
 						validation = false;
 						//return false;
 						   
@@ -216,8 +257,8 @@ function validation(){
 							validation = false;
 							//return false;
 							
-					}*/
-			}); i++;
+					}*/ i++;
+			}); 
 			
 			alert(validation);
 			return validation;
@@ -272,7 +313,7 @@ function update_data($e){
 	 var MarksId = $('#MarksId').val();
 	 var ExamTypeId = $('#ExamTypeId').val();
 	 var StudentId = $('#StudentId').val();
-	 alert(MarksId);alert(ExamTypeId);alert(StudentId);
+	 //alert(MarksId);alert(ExamTypeId);alert(StudentId);
 	 
      var marksarray=[];
 	 var i=0;
@@ -284,7 +325,7 @@ function update_data($e){
 		i++;
 		
      });
-	 alert(marksarray);
+	 //alert(marksarray);
 	 
 	 if(validation()){
  		$.ajax({
@@ -292,7 +333,7 @@ function update_data($e){
 			url: '<?=$url?>marks/update',
 			data: 'MarksId='+MarksId+'&ExamTypeId='+ExamTypeId+'&StudentId='+StudentId+'&marksarray='+marksarray,
 			success: function(response){
-			alert(response);			
+			//alert(response);			
 					if(response == 1){
 						if($e == 1){
 							window.location.href='<?=$url?>marks/listview/<?=$this->session->userdata('yearmx')?>';
@@ -324,42 +365,12 @@ function exammarks(){
 					
 	 });
 }	
-
-
-function courseyear_fun(){
-	var ClassId = $('#StudentClass').val();
-	$.ajax({
-		type: 'POST',
-		url: '<?=$url?>student/courseyear',
-		data: 'ClassId='+ClassId,
-		success: function(response){
-			if(response != ''){
-				$('#CourseYearId').html(response);
-			}
-		}	
-	});
-}		
-
-function group_fun(){
-	var CourseId = $('#StudentClass').val();
-	var YearId = $('#CourseYearId').val();
-	$.ajax({
-		type: 'POST',
-		url: '<?=$url?>student/group',
-		data: 'CourseId='+CourseId+'&YearId='+YearId,
-		success: function(response){
-			if(response != ''){
-				$('#GroupId').html(response);
-			}
-		}	
-	});
-}		
-		
+	
 function section_fun(){
 	var ClassId = $('#ClassId').val();
  		$.ajax({
 				type: 'POST',
-				url: '<?=$url?>attendence/section',
+				url: '<?=$url?>marks/section',
 				data: 'ClassId='+ClassId,
 				success: function(response){
 						if(response != ''){
@@ -374,7 +385,7 @@ function studentlist_fun(){
 	
  		$.ajax({
 				type: 'POST',
-				url: '<?=$url?>attendence/studentlist',
+				url: '<?=$url?>marks/studentlist',
 				data: 'ClassId='+ClassId+'&SectionId='+SectionId,
 				success: function(response){
 				//alert(response);

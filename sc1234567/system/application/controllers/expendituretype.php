@@ -319,19 +319,19 @@ class ExpenditureType extends Controller
 		}
 		$table = 'expendituretype';
 		/*$tableArray = array(
-			array('TableName' => 'course', 'CompairField' => $table.'.ClassId = course.ClassId' )
-		);
+			array('TableName' => 'expendituretype', 'CompairField' => 'expendituretype.ExpenditureTypeId=expenditure.ExpenditureTypeId'),
+		);*/
 		$where = array(
 			 array('condition' => $table.'.Year', 'value' => $year)
 		);
-		$result = $this->Adminmodel->fetch_row($table, $tableArray, $where );*/
-		$result=$this->Adminmodel->export_records($table);
+		$result = $this->Adminmodel->fetch_row($table, $tableArray=array(), $where );
 		echo "<table class ='master_view_tbl' cellspacing='0' cellpadding='0'>";
 		echo "<tr style='font-size:12px; font-weight:bold; color:#3e4341; border-right:1px solid #a4a9a8; background-color:#b3c1bb; height:30px; text-align:center;'>";
 		echo "<th> SNO </th>";
-		echo "<th align='center' >Academic Year</th>";
-		//echo "<th align='center' >Class</th>";
+		echo "<th align='center' >ExpenditureType</th>";
+		echo "<th align='center' >ExpenditureUnder</th>";
 		echo "<th align='center' >Description</th>";
+		echo "<th align='center' >Year</th>";
 		echo "</tr>";
 		$i= 1;
 		foreach($result as $row):
@@ -343,9 +343,10 @@ class ExpenditureType extends Controller
 		
 		echo "<tr style='" . $master_tr_bgcolor . "'>";
 		echo "<td style='padding:5px; text-align:center; ' >" . $i ++ . "</td>";  
-		echo "<td align='center'>" . $row->Year . "</td>";
-		//echo "<td align='center'>" . $row->ClassName . "</td>";
+		echo "<td align='center'>" . $row->ExpenditureType . "</td>";
+		echo "<td align='center'>" . $row->ExpenditureUnder . "</td>";
 		echo "<td align='center'>" . $row->Description . "</td>";
+		echo "<td align='center'>" . $row->Year . "</td>";
 		echo "</tr>";		
 			endforeach;
 		echo "</table>";

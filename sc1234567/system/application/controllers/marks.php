@@ -50,7 +50,7 @@ class Marks extends Controller
 		//$this->pagination->initialize($config);
 		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
 		$this->session->set_userdata('yearmx', $this->pyear);
-		/*$sortby = 'MarksId';
+	     	/*$sortby = 'MarksId';
 		$tableArray = array(
 			array('TableName' => 'student', 'CompairField' => $table.'.StudentId=student.StudentId'),
 			array('TableName' => 'subject', 'CompairField'=> $table.'.SubjectId=subject.SubjectId')
@@ -60,17 +60,8 @@ class Marks extends Controller
 			array( 'condition' => $table.'.InstituteId', 'value' => $this->session->userdata('InstituteId'))
 		);
 		//$where=array();
-		$data['result'] = $this->Adminmodel->fetch_records($config['per_page'], $page, $table, $tableArray, $searchoption , $searchstring, $sortby, $where);
-		$table = 'exam';
-		$where = array(
-			array( 'condition' => $table.'.InstituteId', 'value' => $this->session->userdata('InstituteId'))
-		);
-		$data['exam'] = $this->Adminmodel->show_rows($table, $where);
-		$table = 'subject';
-		$where = array(
-			array( 'condition' => $table.'.InstituteId', 'value' => $this->session->userdata('InstituteId'))
-		);
-		$data['subject'] = $this->Adminmodel->show_rows($table, $where);*/
+		$data['result'] = $this->Adminmodel->fetch_records($config['per_page'], $page, $table, $tableArray, $searchoption , $searchstring, $sortby, $where);*/
+		
 		$data['links'] = $this->pagination->create_links();
 		$data['pages'] = $page;
 		$table = 'course';
@@ -125,6 +116,7 @@ class Marks extends Controller
 		$table = 'classsubject';
 		$where = array(
 		    array('condition' => $table.'.ClassId', 'value' => $class),
+			
 			);
 		$tjoin = array(
 			array('TableName' => 'subject' , 'Condition' => $table.'.SubjectId=subject.SubjectId'),
@@ -333,20 +325,8 @@ class Marks extends Controller
 		 
 	     $this->load->view('marks/subjectlist', $data);
 		 
-		
-		 
-	
 	}
 	
-	/*function statusfun()
-	{
-		$mark = $this->input->post('mark');
-		$data['mark']= $mark;
-		 echo $data;
-	     $this->load->view('marks/subjectlist', $data);
-	}*/
-	
-		
 	function examtype()
 	{
 		$table = 'exam';
@@ -404,26 +384,52 @@ class Marks extends Controller
 		$table = 'marks';
 		$where = array(
 			array('condition' => $table.'.MarksId', 'value' => $id)
-			
 		);
 		$tjoin = array(
 		 	array('TableName' => 'studentclass', 'Condition' => $table.'.StudentId = studentclass.StudentId'),
 			array('TableName' => 'exam', 'Condition' => $table.'.ExamTypeId = exam.ExamId')
 		);
 		$data['result'] = $this->Adminmodel->fetch_row_where( $where, $table, $tjoin);
+		//print_r($data);
+		foreach($data['result'] as $at){
+			$ClassId = $at->StudentClass;
+			$sectionId = $at->SectionId;
+		}
+		$yearno = $this->Adminmodel->maxvalue($table = 'academicyear', $fields = array('AcademicYear'), $where = array());
+		foreach($yearno as $yno){
+			if($yno->AcademicYear != NULL){
+				$year = $yno->AcademicYear;
+			}
+		}
+		
 		$table = 'studentclass';
-		$data['studentclass'] = $this->Adminmodel->show_rows($table, $where = array());
+		$where = array(
+		 	array('condition' => $table.'.StudentClass', 'value' => $ClassId),
+			array('condition' => $table.'.SectionId', 'value' => $sectionId),
+			array('condition' => $table.'.Year', 'value' => $year)
+		 );
+		$data['studentclass'] = $this->Adminmodel->show_rows($table, $where);
+				
 		$table = 'exam';
-		$data['examtype'] = $this->Adminmodel->show_rows($table, $where = array());
+		$where = array(
+					array('condition' => $table.'.Year', 'value' => $year),
+			        array('condition' => $table.'.InstituteId', 'value' => $this->session->userdata('InstituteId'))
+		);
+		$data['examtype'] = $this->Adminmodel->show_rows($table, $where);
+		
 		$table = 'subject';
 		$data['subject'] = $this->Adminmodel->show_rows($table, $where = array());
 		
 		$table = 'section';
-		$data['section'] = $this->Adminmodel->show_rows($table, $where = array());
-		$table = 'academicyear';
-		$data['years'] = $this->Adminmodel->show_rows($table, $where = array());
+		$where = array(
+			            array('condition' => $table.'.InstituteId', 'value' => $this->session->userdata('InstituteId'))
+		);
+		$data['section'] = $this->Adminmodel->show_rows($table, $where);
+				
 		$table = 'course';
-		$where = array();
+		$where = array(
+			            array('condition' => $table.'.InstituteId', 'value' => $this->session->userdata('InstituteId'))
+		);
 		$data['course'] = $this->Adminmodel->show_rows($table, $where);
 		
 		$this->load->view('header', $this->pageinfo);
@@ -445,7 +451,7 @@ class Marks extends Controller
                
                
              );
-		print_r($data);
+		//print_r($data);
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('ExamTypeId', 'ExamTypeId', 'required');
@@ -607,7 +613,7 @@ class Marks extends Controller
 		}
 		
 		echo "<tr style='" . $master_tr_bgcolor . "'>";
-		echo "<td style='padding:5px; text-align:center; ' >" . $i ++ . "</td>";  
+		echo "<td style='padding:5px; text-align:center; ' >" . $i++ . "</td>";  
 		echo "<td align='center'>" . $row->RollNo . "</td>";
 		echo "<td align='center'>" . $row->ExamTypeId . "</td>";
 		echo "<td align='center'>" . $row->SubjectId . "</td>";

@@ -1,6 +1,5 @@
 <?php
-var_dump($result);
-if(isset($result) && count($result) > 0){
+
 	
   echo '<table class="reporttable" border="0" cellpadding="0" cellspacing="1" >  
         <tr><th colspan = "7" id = "table_title">Mark Detail List View </th></tr>
@@ -13,6 +12,7 @@ if(isset($result) && count($result) > 0){
 						
 					</tr>';
    $i = 1;
+   if(isset($result) && count($result>0)){
    foreach($result as $row){
 		            echo '<tr>
 					<td align="center"  >' . $i++. '</td>
@@ -44,14 +44,15 @@ foreach($combinearray as $com=>$value){
 echo '<tr><td>'.$com.'</td>';
 echo '<td>'.$value.'</td></tr>';
 }
-echo '</table>
-</td>';
+echo '</table></td>';
 echo '</tr>';
 	}
-}else{
-	echo '<tr><span style="font-weight:bold; font-size:16px; color:#EA0000;"> No data to display</span></tr>';
+
 }
- echo '</table>';
+else{
+	echo '<tr><span style="font-weight:bold; font-size:12px; color:#EA0000;"> No data to display</span></tr>';
+}
+echo '</table>';
     
 echo "<div class='pagenation'>" . $links . "</div>";
 echo "</div>";

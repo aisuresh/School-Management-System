@@ -63,7 +63,7 @@ $('.browse_media').click(function(){
    		url = '<?=$url?>student/uploadstudentclass';
    }else if(id == 'uploadFees'){
    		url = '<?=$url?>student/uploadstudentfees';
-   }	
+   }
    new AjaxUpload(btnUpload, {
      action: url,
      name: 'uploadfile',
@@ -72,16 +72,15 @@ $('.browse_media').click(function(){
          $("#"+id+'_error').html('Only XLS is allowed');
          $("#"+id+'_error').css('display','block');
          return false;
-       }        
+       }
      },
      onComplete: function(file, response){
 	 	$('#'+id+'_filename').html('');
-		alert("res:"+response);
-       if(response == 'error'){
-			$('#'+id+'_filename').css('display', 'block').html('<span style = "color:#f73a07; font-size:12px; font-weight:600">Fail to upload your file.</span>');
+	   if(response == 'error'){
+			$('#'+id+'_filename').css('display', 'block').html('<span style = "color:#f73a07; font-size:12px; font-weight:600">Error occured. Please check and try again.</span>');
 			$('#'+id+'_xls').val(xlspath.replace(xlspath, ''));	
        }else if(response == 'invalid'){
-			$('#'+id+'_filename').css('display', 'block').html('<span style = "color:#f73a07; font-size:12px; font-weight:600">Invalid format excel file uploaded.</span>');
+			$('#'+id+'_filename').css('display', 'block').html('<span style = "color:#f73a07; font-size:12px; font-weight:600">Invalid file format.</span>');
 			$('#'+id+'_xls').val(xlspath.replace(xlspath, ''));	
 	   }else if(response.indexOf('validation error') != -1){
 	       $('#'+id+'_filename').css('display', 'block').html('<span style = "color:#f73a07; font-size:12px; font-weight:600">File contains incorrect data at record: '+response.substring(17, response.length)+'</span>');
@@ -89,14 +88,11 @@ $('.browse_media').click(function(){
        }else if(response == 'no rows'){
 			$('#'+id+'_filename').css('display', 'block').html('<span style = "color:#f73a07; font-size:12px; font-weight:600">No records to process.</span>');
 			$('#'+id+'_xls').val(xlspath.replace(xlspath, ''));	
-	   }else if(response == 2){
-	   	    $('#'+id+'_filename').css('display', 'block').html('<span style = "color:#f73a07; font-size:12px; font-weight:600">Record already exists!..</span>');
-			$('#'+id+'_xls').val(xlspath.replace(xlspath, ''));	
-		}else{ 
-	   		$('#'+id+'_filename').css('display', 'block').html('<span style = "color:#4bb30d; font-size:10px; font-weight:600">'+response+' File is uploaded.</span>');
+	   }else{ 
+	   		$('#'+id+'_filename').css('display', 'block').html('<span style = "color:#4bb30d; font-size:10px; font-weight:600">'+response+' uploaded successfully.</span>');
 			$('#'+id+'_xls').val(xlspath.replace(xlspath, response));
 	   }
      }
-   });  
- });    		
+   });
+ });
 </script>

@@ -56,13 +56,15 @@ echo "<span>  Addnew  </span>";
 echo "</a>";
 echo "</div>";
 
-echo "<div class='events' style = 'width:80px;'>";
+echo "</div>";
+
+/*echo "<div class='events' style = 'width:80px;'>";
 echo "<a href='".$url."marks/marksrecords' style = 'width:80px;float:left;'>";
 echo "<span style = 'width:80px;float:left;' ><img src='".$url."images/btn4.png' border='0' /></span>";
 echo "<span style = 'width:80px;float:left;' >Records</span>";
 echo "</a>";
-echo "</div>";
-echo "</div>";
+echo "</div>";*/
+
 
 echo "<div align = 'center' class='content'>";
 

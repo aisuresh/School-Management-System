@@ -102,7 +102,7 @@ echo "<td width='2%' class='spacetd' > </td>";
 echo "<td width='33%' class = 'dataview' >";
 echo "<select name = 'Medium' id = 'Medium' >";
 echo "<option value = 'x'>- - Select Medium - -</option>";
-echo "<option value = '1'>Telugu</option>";
+echo "<option value = '1'>Tamil</option>";
 echo "<option value = '2'>English</option>";
 echo "</select>";
 echo "</td>";
