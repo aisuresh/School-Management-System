@@ -23,5 +23,3 @@ School Management System (SMS) - SaaS based application
     Expenditure Module 
     Reports Module
     
-# Demo: 
-    https://www.youtube.com/watch?v=mltvb_3tc5c
