@@ -7,3 +7,21 @@ School Management System (SMS) - SaaS based application
     Front-end: HTML, CSS, Javascript, JQuery, AJAX
     Server-side: PHP CodeIgniter Framework
     Database: MySQL
+
+# Modules:
+    Login Module    
+    Student Module 
+    Staff Module    
+    Admission Module 
+    Attendance Module     
+    Fees Module 
+    Examination Module     
+    Library Module
+    Books Module    
+    Hostel Module
+    Admin Module
+    Expenditure Module 
+    Reports Module
+    
+# Demo: 
+    https://www.youtube.com/watch?v=mltvb_3tc5c
