@@ -1,4 +1,4 @@
-# School-Management-System
+# School Management System
 School Management System (SMS) - SaaS based application
 
 
