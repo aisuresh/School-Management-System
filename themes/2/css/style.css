@@ -1,0 +1,208 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0;}
+html, body{ width:100%; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; background-color:#dff0f9 }
+.mainbody{ width:100%; height:auto; position:relative; margin:0 auto; }
+.header{ width:100%; height:83px; position:relative; float:left; background: #ffffff url(../images/headerbg.gif) 10px 0 repeat-x; }
+.logo{ width:200px; height:83px; float:left;}
+.logo img{ float:left; margin-left:10px; margin-top:4px;}
+.logout_bar{width:300px; height:65px; float:right;}
+.logout{ width:auto; height:50px; position:relative; float:right; margin-right:10px;}
+.logout span { width:100%;}
+.logout span a {width:100%;font-size:12px; color:#404343; text-decoration:none;}
+.logout span a:hover{color:#404343; text-decoration:underline;}
+.menu{ width:100%; height:26px; position:relative; margin-top:-6px; float:left; background: #ffffff url(../images/menubg.gif) repeat-x; }
+
+.container{width:99%; padding:5px; position:relative; float:left; background: #ffffff url(../images/containerbg.gif) repeat-x; z-index:-1;  }
+.content_header{width:100%; height:50px; border-bottom:2px solid #E6F7FF; float:left; z-index:-1;}
+.content_title{width:30%; height:20px; color:#FF6600; font-size:16px; padding-left:10px; padding-top:20px; font-weight:bold; float:left;}
+.content_message{width:20%; height:20px; color:#FF6600; font-size:12px; font-weight:bold; padding-left:5px; padding-top:20px;  float:left;}
+.content_events{width:46%; height:45px; float:left; padding-left:10px; padding-top:3px; }
+.events { width:55px; float:right; margin-right:5px;}
+.events a{ width:55px; float:left; text-decoration:none;  text-align:center; color:#FF6600;  font-weight:bold; cursor:pointer;}
+.events a span{width:auto; text-align:center;}
+
+ div.search_area{ width:210px; height:23px; float:right; margin-top:-10px;   border:1px solid #b1b2b2; margin-right:20px; background-color:#e6f1f3;}
+ span.search_box{ float:left; }
+ span.search_box input{border:0px;  border-right:1px solid #b1b2b2; width:150px; height:22px; float:left; background-color:#e6f1f3; }
+ span.search_btn{ width:27px; height:23px; float:left; background-color:#d5e2e4; } 
+ span.search_btn img{border:0px; float:left; margin:1px 0 0 4px;  }
+ span.search_option { width:30px; height:23px; float:left; border:0px; border-right:1px solid #b1b2b2; background-color:#d5e2e4; }
+ span.search_option ul li a img{border:0px;  margin-left:4px; margin-top:2px;  }
+ span.search_option ul li a{outline:none; display:block; width:25px; cursor:default;  }
+ span.search_btn a { width:30px; float:left; outline:none; cursor:pointer; border:1pxc solid #00CC33;}
+  
+ img.order_type{ opacity:0.2;}
+ img.order_type:hover{ opacity:1;}
+
+.content {width:97%; border-top:2px solid #F4F4F4; padding:15px;float:left;}
+.footer{width:100%; height:60px; position:relative; float:left; background: #ffffff url(../images/footerbg.gif) repeat-x;}
+
+.login_panel{ width:360px; height:210px; margin:120px auto; border:2px solid #6699CC; -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px; 
+behavior: url(css/border-radius.htc); background:url(../images/loginbg.gif) repeat-x; padding:20px; padding-top:20px;}
+.logintable{ margin-top:10px;}
+.logintable label{ color:#0f70d4; font-size:13px; font-weight:bold; text-align:right;}
+.logintable td{ height:30px;}
+.logintable input{ border:1px solid #6699CC;}
+.logintable .text{ border:1px solid #6699CC; width:150px; height:20px; font-size-adjust:inherit; font-size:16px; bottom:0;}
+.logintable .submit{ border:1px solid #6699CC; width:151px; height:25px; cursor:pointer; background:url(../images/buttonbg.gif) repeat-x; color:#0f70d4; font-size:13px; font-weight:bold;}
+
+.formtable{ width:50%; border:1px solid #bfd9ec; }
+.formtable td.datafield{ height:35px; color:#0a66c4; font-size:12px; font-weight:bold;background-color:#f1f5f8;  border-bottom:1px solid #d0e5ee;}
+.formtable td.spacetd{background-color:#f1f5f8; border-bottom:1px solid #d0e5ee; border-right:1px solid #d0e5ee;}
+.formtable td input[type = text]{ border:1px solid #C4C4C4; width:260px; height:25px; -moz-border-radius: 6px; -webkit-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px;}
+.formtable td input[type = text]:focus{border:1px solid #55aaff; moz-box-shadow: 1px 0px 3px #ccc; -webkit-box-shadow: 1px 0px 3px #ccc;
+box-shadow: 1px 0px 3px #ccc;}
+.formtable td select{ width:180px; height:20px; border:1px solid #75b3df;}
+.formtable td select option{ height:18px; padding-top:2px;}
+.formtable td.dataview{ font-weight:normal; color:#333333; background-color:#f9fbfc; padding-left:10px; border-bottom:1px solid #e7f3f9;}
+.mandatory{ color:#FF0000; padding-bottom:5px;}
+.reporttable{border:1px solid #bfd9ec;}
+.reporttable th{height:20px; color:#0a66c4; font-size:13px; font-weight:bold;background-color:#d1e2ec; border-right:1px solid #bfd9ec; }
+.reporttable th a{ cursor:pointer;}
+.reporttable tr { background-color:#f1f5f8;}
+.reporttable tr:hover{ height:20px; background-color:#fbfcfc; }
+.reporttable tr td{ height:35px; color:#0a66c4;  border-right:1px solid #bfd9ec; }
+
+.pagenation{ width:100%; height:20px; float:left; padding-top:5px; text-align:center; margin-top:5px;}
+.pagenation a{ width:auto; height:auto; padding:3px; text-align:center; border:1px solid #7f8a88; background-color:#bbc3c2; text-decoration:none; font-weight:bold; color:#3e4341; }
+
+/* search option css */
+#nav {
+		margin:0; 
+		padding:0; 
+		list-style:none;
+		width:50px;
+	}	
+	
+/* make the LI display inline */
+/* it's position relative so that position absolute */
+/* can be used in submenu */
+#nav li {
+	float:left; 
+	display:block; 
+	/*width:171px; */
+	/*background:#ccc; */
+	position:relative;
+	/*z-index:500;*/ 
+	margin:0 1px;
+}
+
+#nav li a:hover {
+	color:#fff;
+}
+
+/* submenu, it's hidden by default */
+#nav ul {
+	position:absolute; 
+	left:0; 
+	display:none; 
+	margin:0 0 0 -1px; 
+	padding:0; 
+	list-style:none;
+	z-index:9999;
+}
+
+#nav ul li {
+	width:171px;
+	height:15px;
+	padding: 4px 5px; 
+	float:left; 
+	left:-153px;
+	top:0px;
+	border:1px solid #b1babb;
+	border-top:0;
+	color:#666;
+	font-weight:700; 
+}
+ul#nav li ul li {
+	background-color:#e3e8e9;
+	text-align:left;
+}
+ul#nav li ul li label {
+cursor:pointer;
+}
+
+#nav ul a:hover {
+	text-decoration:underline;	
+}
+
+/* fix ie6 small issue */
+/* we should always avoid using hack like this */
+/* should put it into separate file : ) */
+*html #nav ul {
+	margin:0 0 0 -2px;
+}
+/* Home Page Css */
+.content_left{ width:16%; height:670px; background-color:#EAF9FF; float:left;}
+.content_right{ width:83%;float:left;}
+
+div.homemenu a div{ width:96%; height:40px; padding:20px 0 0 10px; border-top:1px solid #ffffff; border-bottom:1px solid #5ECBFF; font-size:15px; font-weight:bold; text-align:left; color:#0066FF; cursor:pointer;}
+div.homemenu a div:hover{ background-color:#BBE9FF;}
+table.studentinfo_tbl{ margin-top:5px; margin-left:10px; float:left;}
+table.studentinfo_tbl tr td{ height:25px;}
+table.studentinfo_tbl tr td.field_title{height:30px; color:#FF6600; font-size:16px; font-weight:bold; background-color:#ecf6f9; padding-left:5px;}
+table.studentinfo_tbl tr td.field{ height:23px; color:#003D59; font-size:14px; font-weight:bold; background-color:#ecf6f9; padding-left:5px;}
+table.studentinfo_tbl tr td.info{ height:23px; background-color:#f4f8f9; padding-left:5px; }
+table.attendence_tbl{ width:100%; height:100%; float:left;}
+table.attendence_tbl tr th{ height:25px; font-size:13px; color:#003D59; font-weight:bold; text-align:center; background-color:#e6ebed }
+table.attendence_tbl tr td{ height:20px; text-align:center; background-color:#edf3f5}
+table.attendence_tbl tr td.subject{ height:20px; font-size:13px; color:#003D59; font-weight:bold; text-align:left; padding-left:5px; background-color:#edf3f5}
+table.todayinfo_tbl{ margin-left:5px; float:left; overflow-x:scroll;}
+table.todayinfo_tbl tr td.field_title{height:35px; color:#FF6600; font-size:14px; font-weight:bold; background-color:#ecf6f9; padding-left:5px;}
+table.todayinfo_tbl tr.info_title{height:30px; color:#003D59; background-color:#e6ebed; font-size:13px; font-weight:bold; text-align:center;}
+table.todayinfo_tbl tr.info_titlea{height:30px; font-size:12px; color:#003D59; font-weight:bold; text-align:center; background-color:#e6ebed}
+table.todayinfo_tbl tr.info_value{height:20px; font-size:12px; color:#000; text-align:center; background-color:#edf3f5; }
+table.todayinfo_tbl tr td.field{padding-left:10px; height:35px; color:#FF6600; font-size:14px; font-weight:bold; background-color:#ecf6f9; padding-left:5px;}
+table.todayinfo_tbl tr td.info{padding-left:10px; height:20px; font-size:12px; color:#000; text-align:left; background-color:#edf3f5;}
+table.todayinfo_tbl tr td.info input{ width:200px; height:25px; -moz-border-radius: 6px; -webkit-border-radius: 6px; -khtml-border-radius: 6px; border-radius: 6px; }
+table.todayinfo_tbl tr td.info textarea{ width:180px; height:50px;}
+table.todayinfo_tbl tr td.info #sendmail{ width:180px; height:25px; font-weight:bold;}
+
+#message1{width:28%; height:23px; padding-left:35px; padding-top:6px; font-size:14px; font-weight:bold; text-align:left; color:#009900; border:1px solid #006600; background:#DFFFE8 url(../images/OK.png) 5px 2px no-repeat; -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px; 
+behavior: url(css/border-radius.htc); display:none;}
+#message{width:40%; height:23px; padding-left:35px; padding-top:6px; font-size:14px; font-weight:bold; text-align:left; color:#FF0000; border:1px solid #FF0000; background:#FFD9D9 url(../images/NO.png) 5px 2px no-repeat; -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px; behavior: url(css/border-radius.htc); display:none;}
+#mandatory{ width:50%; height:20px; text-align:right; margin-top:5px;}
+
+table#record_tbl{ border:1px solid #6ea8d2}
+table#record_header{ border-bottom:1px solid #6ea8d2}
+#recordtitle{ background-color:#88bfe0; font-size:12px; font-weight:600; color:#0a66c4}
+tr#recordtitle th{ border-right:1px solid #6ea8d2; background-color:#88bfe0;}
+#recordtitlevalue td{background-color:#bfddef; padding-left:10px; font-weight:600;}
+tr#recordtitlevalue td{ border-right:1px solid #6ea8d2}
+#recordheader{background-color:#d1e2ec; font-size:12px; font-weight:600; color:#0a66c4}
+tr#recordheader th{ border-right:1px solid #6ea8d2; border-bottom:1px solid #6ea8d2; }
+table#record_tbl tr#recordheader th{border-right:1px solid #6ea8d2;  background-color:#d1e2ec;}
+table#record_tbl tr.row td{ border-bottom:1px solid #fff; border-right:1px solid #6ea8d2; }
+table#record_tbl tr.row{background-color:#f1f5f8;}
+table#record_tbl tr.row:hover{ height:20px; background-color:#fbfcfc; }
+
+div.showbox{ float:right; margin-right:10px; margin-top:8px;}
+div.showbox select { width:80px; height:25px; padding:3px}
+div.showbtn{ float:right; margin-top:13px; }
+div.showbtn a{ width:24px; height:8px; padding:4px; background-color:#59b5f8; color:#062d4a; font-weight:600; text-decoration:none; border:1px solid #2f80ba}
+
+div.showboxa{ float:right; margin-right:10px; margin-top:10px;}
+div.showboxa select { width:80px; height:25px; padding:3px}
+
+fieldset#studentclass{ width:562px; height:408px; margin-top:10px; border:3px solid #1b84b5; -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px; }
+#studentclass div{ float:left; background-color:#e4f4fb; -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px; padding:3px;}
+#studentclass select{ width:250px; height:400px; background-color:#e4f4fb; border:none;}
+#studentclass select option{ font-size:14px; font-weight:600; padding-top:3px; height:22px; width:231px; text-indent:5px; border-bottom:1px dotted #46C2FF}
+#studentclass select option:focus{ background-color:#1cb51b;}
+div#select_box{width:250px;float:left; border:1px solid #0099FF;  -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px;}
+div#addremove{ width:40px; height:260px; float:left; padding-top:140px; border:none; background:none; }
+div#addremove a{  width:40px; float:left; vertical-align:middle; text-align:center; text-decoration:none; margin-top:20px;}
+
+table#timetable_tbl tr th.classtitle{ color:#023857; font-size:16px; font-weight:600; background-color:#68c0f2}
+table#timetable_tbl tr th{ text-align:center; color:#064d75;  border:1px solid #7cb2d1;  border-left:none; padding:2px 15px 2px 15px; border-top:none; font-size:14px; font-weight:600; height:30px; background-color:#9ddafd}
+table#timetable_tbl tr td{ text-align:center; background-color:#dbf0fc; border:1px solid #a7d2eb; border-top:none; border-left:none; padding:2px 0px 2px 0px; }
+table#timetable_tbl tr td.dayname{ font-size:12px; font-weight:600; color:#0099FF}
+select.timetable_select{ width:100px;}
+div#error_msg{color:#0099FF; font-weight:600; font-size:14px; padding-top:25px; display:none;}
+table.reporttable, table.reporttable th#table_title, table.formtable, table.formtable tr th#table_title{height: 35px;  -moz-border-radius: 10px 10px 0 0; -webkit-border-radius: 10px 10px 0 0; -khtml-border-radius: 10px 10px 0 0; border-radius: 10px 10px 0 0; background: #feffff; /* Old browsers */
+background: -moz-linear-gradient(top, #feffff 0%, #ddf1f9 35%, #a0d8ef 100%); /* FF3.6+ */ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feffff), color-stop(35%,#ddf1f9), color-stop(100%,#a0d8ef)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #feffff 0%,#ddf1f9 35%,#a0d8ef 100%); /* Chrome10+,Safari5.1+ */ background: -o-linear-gradient(top, #feffff 0%,#ddf1f9 35%,#a0d8ef 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #feffff 0%,#ddf1f9 35%,#a0d8ef 100%); /* IE10+ */ background: linear-gradient(to bottom, #feffff 0%,#ddf1f9 35%,#a0d8ef 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#a0d8ef',GradientType=0 ); /* IE6-9 */}
+table.reporttable th#table_title, table.formtable tr th#table_title{text-align:left; text-indent:10px; font-size:13px; color:#1387C5;}

@@ -1,0 +1,46 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0; outline:none;}
+a{ text-decoration:none;}
+html, body{ width:100%; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; }
+#tabwarp{ width:1000px; height:inherit;   margin: 5px auto; position:relative;  -moz-border-radius: 8px 8px 0 0; -webkit-border-radius:8px 8px 0 0; -khtml-border-radius: 8px 8px 0 0; border-radius:8px 8px 0 0; }
+#tabheader{ float:left; width:1000px; height:80px; background:#fff url(../images/tab_header.gif) repeat-x ; -moz-border-radius: 8px 8px 0 0; -webkit-border-radius:8px 8px 0 0; -khtml-border-radius: 8px 8px 0 0; border-radius:8px 8px 0 0; border:1px solid #76eafb; border-bottom:0; }
+#tablogo{ float:left; width:200px; height:80px;}
+#tablogo_right{ float:right; width:800px; height:80px;}
+#tabmenu{ width:1000px; height:35px; float:left; background:#fff url(../images/tab_menubg.gif) repeat-x ; border:1px solid #76eafb;}
+#tabcontainer{ float:left; width:1000px; height:500px; border:1px solid #76eafb; border-top:0;}
+#tabfooter{ float:left; width:1000px; height:30px; border:1px solid #76eafb; border-top:0; -moz-border-radius: 0 0 8px 8px; -webkit-border-radius:0 0 8px 8px; -khtml-border-radius: 0 0 8px 8px; border-radius: 0 0 8px 8px; background:#fff url(../images/tab_menubg.gif) left bottom repeat-x ;}
+
+
+.login_panel{ width:360px; height:210px; margin:60px auto; border:2px solid #6699CC; -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px; behavior: url(css/border-radius.htc); background:url(../images/loginbg.gif) repeat-x; padding:20px; padding-top:20px;}
+.logintable{ margin-top:10px;}
+.logintable label{ color:#0f70d4; font-size:13px; font-weight:bold; text-align:right;}
+.logintable td{ height:30px;}
+.logintable input{ border:1px solid #6699CC;}
+.logintable .text{ border:1px solid #6699CC; width:150px; height:20px; font-size-adjust:inherit; font-size:16px; bottom:0;}
+.logintable .submit{ border:1px solid #6699CC; width:151px; height:25px; cursor:pointer; background:url(../images/buttonbg.gif) repeat-x; color:#0f70d4; font-size:13px; font-weight:bold;}
+.formtable{ width:50%; border:1px solid #bfd9ec; }
+.formtable td.datafield{ height:30px; color:#0a66c4; font-size:12px; font-weight:bold;background-color:#f1f5f8;  border-bottom:1px solid #d0e5ee;}
+.formtable td.spacetd{background-color:#f1f5f8; border-bottom:1px solid #d0e5ee; border-right:1px solid #d0e5ee;}
+.formtable td input[type = text]{ width:180px; height:18px; border:1px solid #75b3df;}
+.formtable td select{ width:180px; height:20px; border:1px solid #75b3df;}
+.formtable td select option{ height:18px; padding-top:2px;}
+.formtable td.dataview{ font-weight:normal; color:#333333; background-color:#f9fbfc; padding-left:10px; border-bottom:1px solid #e7f3f9;}
+div#tabmenu ul{ float:left; list-style:none; }
+div#tabmenu ul li{ float:left; margin-left:10px; }
+div#tabmenu ul li a{ float:left; padding:7px 31px 7px 31px; font-size:16px; font-weight:600; color:#054357;}
+div#tabmenu ul li a:hover{ background:#b5f3fc url(../images/tab_menubg_ovr.gif) left top repeat-x;  padding:15px 30px 10px 30px; margin-top: -11px; -moz-border-radius: 8px 8px 0 0; -webkit-border-radius:8px 8px 0 0; -khtml-border-radius: 8px 8px 0 0; border-radius:8px 8px 0 0; border:1px solid #3ccaee; border-bottom:0;}
+div#tabmenu ul li a.current{ background:#b5f3fc url(../images/tab_menubg_ovr.gif) left top repeat-x;  padding:15px 30px 10px 30px; margin-top: -11px; -moz-border-radius: 8px 8px 0 0; -webkit-border-radius:8px 8px 0 0; -khtml-border-radius: 8px 8px 0 0; border-radius:8px 8px 0 0; border:1px solid #3ccaee; border-bottom:0;}
+
+table#attendance_tbl{ width:50%;}
+table#attendance_tbl tr td{ height:30px; font-size:16px; font-weight:600; border-bottom:1px solid #6699CC; padding:5px 0 5px 0;}
+table#attendance_tbl tr td.sno{width:5%; }
+table#attendance_tbl tr td{ height:30px;}
+table#attendance_tbl tr td label{ font-size:16px; font-weight:600;}
+div.checkbox{ float:left; width:40px; height:40px; }
+div.checkbox a { float:left; width:45px; height:40px; display:block; background:url(../images/checkbox.gif) left top no-repeat}
+div.checkbox a.checked{background:url(../images/checkbox.gif) right top no-repeat}
+table#attendance_tbl tr:hover{ background-color:#ecffdf;  }
+input#save{ padding:5px 10px 5px 10px; font-weight:600; -moz-border-radius: 8px; -webkit-border-radius:8px; -khtml-border-radius: 8px; border-radius:8px; border:1px solid #3ccaee; cursor:pointer;  background:#b5f3fc url(../images/tab_menubg_ovr.gif) left top repeat-x; -moz-box-shadow: 0px 0px 3px #292929; -webkit-box-shadow: 0px 0px 3px #292929; box-shadow: 0px 0px 3px #292929;}
+
+

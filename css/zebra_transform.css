@@ -1,0 +1,91 @@
+.Zebra_TransForm_Checkbox,
+.Zebra_TransForm_Checkbox_Focus,
+.Zebra_TransForm_Checkbox_Tick,
+.Zebra_TransForm_Checkbox_Disabled,
+.Zebra_TransForm_Radio,
+.Zebra_TransForm_Radio_Focus,
+.Zebra_TransForm_Radio_Dot,
+.Zebra_TransForm_Radio_Disabled,
+.Zebra_TransForm_Arrow {
+    background-image: url('sprites.png');
+    _background-image: url('sprites-ie6.gif');
+    background-repeat: no-repeat;
+	width:50px; height:50px;
+	margin:-40px 0 0 30px;
+}
+
+.Zebra_TransForm_Checkbox,
+.Zebra_TransForm_Radio {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.Zebra_TransForm_Checkbox {
+    background-position: left top;
+	
+}
+
+.Zebra_TransForm_Radio {
+    background-position: left -19px;
+}
+
+/*  CHECK BOXES */
+
+.Zebra_TransForm_Checkbox_Focus {
+    background-position: -19px top;
+}
+
+.Zebra_TransForm_Checkbox_Tick {
+    width: 50px;
+    height: 50px;
+    margin: -1px 0 0 0px !important;
+    background-position: -1px 0px; /* outside the boundries as we don't want to show anything */
+}
+
+.Zebra_TransForm_Checkbox_Checked .Zebra_TransForm_Checkbox_Tick {
+    background-position: -51px 0px;
+}
+
+.Zebra_TransForm_Checkbox_Disabled,
+.Zebra_TransForm_Checkbox_Checked_Disabled {
+    background-position: -38px top;
+    cursor: auto;
+}
+
+.Zebra_TransForm_Checkbox_Checked_Disabled .Zebra_TransForm_Checkbox_Tick {
+    background-position: -22px 0px;
+}
+
+/*  RADIO BUTTONS */
+
+.Zebra_TransForm_Radio_Focus {
+    background-position: -19px -19px;
+}
+
+.Zebra_TransForm_Radio_Dot {
+    width: 7px;
+    height: 7px;
+    margin: 6px 0 0 6px !important;
+    background-position: -57px -76px; /* outside the boundries as we don't want to show anything */
+}
+
+.Zebra_TransForm_Radio_Checked .Zebra_TransForm_Radio_Dot {
+
+    background-position: -6px -63px;
+}
+
+.Zebra_TransForm_Radio_Disabled,
+.Zebra_TransForm_Radio_Checked_Disabled {
+    background-position: -38px -19px;
+    cursor: auto;
+}
+
+.Zebra_TransForm_Radio_Checked_Disabled .Zebra_TransForm_Radio_Dot {
+    background-position: -24px -63px;
+}
+
+div.Zebra_TransForm_Checkbox{ float:left; position:relative; left:0; top:0; margin-top:-50px;}
+
+
